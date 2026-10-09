@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7 Wonders · Singers of Russia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Cormorant+Garamond:wght@300;400;600&family=Cormorant:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: #F3E9D2;
+            font-family: 'Cormorant Garamond', serif;
+            color: #1F3D2E;
+            min-height: 100vh;
+            padding-bottom: 100px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1F3D2E 0%, #2d5a42 100%);
+            padding: 50px 20px;
+            text-align: center;
+            border-bottom: 4px solid #B8863B;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: #B8863B;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            margin-bottom: 10px;
+            letter-spacing: 3px;
+        }
+
+        .header .subtitle {
+            font-size: 1.4rem;
+            color: #F3E9D2;
+            font-style: italic;
+            font-family: 'Cormorant', serif;
+        }
+
+        .header .russian-title {
+            font-size: 1.2rem;
+            color: #B8863B;
+            margin-top: 10px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .branding-top {
+            text-align: center;
+            padding: 12px;
+            background: #7A2E22;
+            color: #F3E9D2;
+            font-family: 'Cormorant', serif;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+        }
+
+        .branding-top a {
+            color: #B8863B;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .branding-top a:hover { text-decoration: underline; }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 50px 20px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: #1F3D2E;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: #B8863B;
+            margin: 15px auto 0;
+        }
+
+        .artists-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 40px;
+        }
+
+        .artist-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f5f0e8 100%);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(31, 61, 46, 0.2);
+            border: 3px solid #B8863B;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .artist-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 45px rgba(31, 61, 46, 0.35);
+        }
+
+        .portrait-container {
+            position: relative;
+            height: 320px;
+            background: linear-gradient(135deg, #1F3D2E 0%, #2d5a42 50%, #1F3D2E 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .portrait-container::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at 30% 30%, rgba(184, 134, 59, 0.15) 0%, transparent 70%);
+        }
+
+        .portrait {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            border: 6px solid #B8863B;
+            object-fit: cover;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+            position: relative;
+            z-index: 1;
+            background: #F3E9D2;
+        }
+
+        .artist-info {
+            padding: 30px 25px 20px;
+            text-align: center;
+        }
+
+        .artist-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: #1F3D2E;
+            margin-bottom: 8px;
+        }
+
+        .artist-years {
+            font-size: 1.15rem;
+            color: #7A2E22;
+            font-style: italic;
+            margin-bottom: 15px;
+            font-family: 'Cormorant', serif;
+        }
+
+        .artist-description {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            color: #333;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .vinyl-section {
+            padding: 25px 20px;
+            background: linear-gradient(180deg, #f5f0e8 0%, #ebe4d4 100%);
+            border-top: 3px solid #B8863B;
+        }
+
+        .vinyl-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .vinyl-record {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            background: 
+                radial-gradient(circle at center, #B8863B 0%, #B8863B 18%, #1a1a1a 18%, #1a1a1a 20%, #2a2a2a 20%, #2a2a2a 22%, #1a1a1a 22%, #1a1a1a 40%, #2a2a2a 40%, #2a2a2a 42%, #1a1a1a 42%, #1a1a1a 60%, #2a2a2a 60%, #2a2a2a 62%, #1a1a1a 62%, #1a1a1a 80%, #2a2a2a 80%, #2a2a2a 82%, #1a1a1a 82%, #1a1a1a 100%);
+            position: relative;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+            transition: transform 0.3s ease;
+        }
+
+        .vinyl-record:hover { transform: scale(1.05); }
+
+        .vinyl-record.playing {
+            animation: spin 2.5s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .vinyl-record::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            background: #B8863B;
+            border: 3px solid #7A2E22;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+        }
+
+        .vinyl-record::after {
+            content: '♪';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.3rem;
+            color: #1F3D2E;
+            font-weight: bold;
+            z-index: 2;
+        }
+
+        .track-list {
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .track-item {
+            background: #ffffff;
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            border-left: 4px solid #B8863B;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .track-item:hover {
+            background: #F3E9D2;
+            transform: translateX(5px);
+            border-left-color: #7A2E22;
+        }
+
+        .track-item.active {
+            background: #F3E9D2;
+            border-left-color: #7A2E22;
+            box-shadow: 0 2px 12px rgba(122, 46, 34, 0.3);
+        }
+
+        .track-number {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            color: #7A2E22;
+            font-size: 1.1rem;
+            min-width: 25px;
+        }
+
+        .track-name {
+            font-size: 1.05rem;
+            color: #1F3D2E;
+            flex: 1;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .track-icon {
+            font-size: 1.2rem;
+            opacity: 0.5;
+        }
+
+        .track-item.active .track-icon {
+            opacity: 1;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .player-controls {
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            background: linear-gradient(135deg, #1F3D2E 0%, #2d5a42 100%);
+            padding: 18px 25px;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.4);
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            z-index: 1000;
+            border-top: 3px solid #B8863B;
+        }
+
+        .player-controls.active { display: flex; }
+
+        .player-info {
+            color: #F3E9D2;
+            font-family: 'Cormorant', serif;
+            font-size: 1.2rem;
+            flex: 1;
+        }
+
+        .player-info strong {
+            color: #B8863B;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .player-controls-center {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .play-pause-btn {
+            background: #B8863B;
+            border: none;
+            width: 45px; height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.3rem;
+            color: #1F3D2E;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .play-pause-btn:hover {
+            background: #d4a04a;
+            transform: scale(1.1);
+        }
+
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #F3E9D2;
+            font-size: 1.1rem;
+        }
+
+        .volume-control input[type="range"] {
+            width: 100px;
+            accent-color: #B8863B;
+            cursor: pointer;
+        }
+
+        .error-message {
+            color: #7A2E22;
+            font-style: italic;
+            text-align: center;
+            padding: 10px;
+            background: #F3E9D2;
+            border-radius: 8px;
+            margin-top: 10px;
+            border: 2px solid #7A2E22;
+        }
+
+        .branding-footer {
+            text-align: center;
+            padding: 20px;
+            background: #7A2E22;
+            color: #F3E9D2;
+            font-family: 'Cormorant', serif;
+            font-size: 1.1rem;
+            margin-top: 60px;
+        }
+
+        .branding-footer a {
+            color: #B8863B;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .branding-footer a:hover { text-decoration: underline; }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2.5rem; }
+            .header .subtitle { font-size: 1.1rem; }
+            .artists-grid { grid-template-columns: 1fr; gap: 30px; }
+            .portrait { width: 180px; height: 180px; }
+            .artist-name { font-size: 1.8rem; }
+            .player-controls {
+                flex-direction: column;
+                gap: 12px;
+                padding: 15px;
+            }
+            .player-info { text-align: center; font-size: 1rem; }
+            .volume-control input[type="range"] { width: 80px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="branding-top">
+        🎵 7 Wonders · <a href="https://t.me/eng_with_betty" target="_blank">@eng_with_betty</a> · Telegram
+    </div>
+
+    <div class="header">
+        <h1>7 Wonders</h1>
+        <p class="subtitle">Singers of Russia · Pop & Rock Icons</p>
+        <p class="russian-title">Певцы России</p>
+    </div>
+
+    <div class="container">
+        <h2 class="section-title">Legendary Voices</h2>
+
+        <div class="artists-grid">
+
+            <!-- DIMA BILAN -->
+            <div class="artist-card">
+                <div class="portrait-container">
+                    <img src="images/bilan.jpg" alt="Dima Bilan" class="portrait">
+                </div>
+                <div class="artist-info">
+                    <h2 class="artist-name">Dima Bilan</h2>
+                    <p class="artist-years">Born 1981 · Eurovision 2008 Champion</p>
+                    <p class="artist-description">
+                        The face of Russian pop music. Winner of Eurovision 2008 with "Believe". 
+                        International career with 32 awards including MTV Europe Music Awards. 
+                        Dreams of becoming a space tourist.
+                    </p>
+                </div>
+                <div class="vinyl-section">
+                    <div class="vinyl-container">
+                        <div class="vinyl-record" data-artist="bilan"></div>
+                        <div class="track-list">
+                            <div class="track-item" data-track="bilan_believe.mp3" data-artist="Dima Bilan" data-title="Believe">
+                                <span class="track-number">1</span>
+                                <span class="track-name">Believe</span>
+                                <span class="track-icon">▶</span>
+                            </div>
+                            <div class="track-item" data-track="bilan_never_let_you_go.mp3" data-artist="Dima Bilan" data-title="Never Let You Go">
+                                <span class="track-number">2</span>
+                                <span class="track-name">Never Let You Go</span>
+                                <span class="track-icon">▶</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SERGEY LAZAREV -->
+            <div class="artist-card">
+                <div class="portrait-container">
+                    <img src="images/lazarev.jpg" alt="Sergey Lazarev" class="portrait">
+                </div>
+                <div class="artist-info">
+                    <h2 class="artist-name">Sergey Lazarev</h2>
+                    <p class="artist-years">Born 1983 · Actor Turned Pop Star</p>
+                    <p class="artist-description">
+                        Former member of Smash!! duo. Represented Russia at Eurovision 2016 and 2019. 
+                        One of Russia's most popular singers and actors. Known for hits like "7 Wonders".
+                    </p>
+                </div>
+                <div class="vinyl-section">
+                    <div class="vinyl-container">
+                        <div class="vinyl-record" data-artist="lazarev"></div>
+                        <div class="track-list">
+                            <div class="track-item" data-track="lazarev_7_wonders.mp3" data-artist="Sergey Lazarev" data-title="7 Wonders">
+                                <span class="track-number">1</span>
+                                <span class="track-name">7 Wonders</span>
+                                <span class="track-icon">▶</span>
+                            </div>
+                            <div class="track-item" data-track="lazarev_you_are_the_only_one.mp3" data-artist="Sergey Lazarev" data-title="You Are the Only One">
+                                <span class="track-number">2</span>
+                                <span class="track-name">You Are the Only One</span>
+                                <span class="track-icon">▶</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIKTOR TSOI -->
+            <div class="artist-card">
+                <div class="portrait-container">
+                    <img src="images/tsoi.jpg" alt="Viktor Tsoi" class="portrait">
+                </div>
+                <div class="artist-info">
+                    <h2 class="artist-name">Viktor Tsoi</h2>
+                    <p class="artist-years">1962–1990 · The Voice of Kino</p>
+                    <p class="artist-description">
+                        Pioneer of Russian rock music. Leader of the legendary band Kino. 
+                        Cultural hero whose music remains popular today. Died in a tragic car accident.
+                    </p>
+                </div>
+                <div class="vinyl-section">
+                    <div class="vinyl-container">
+                        <div class="vinyl-record" data-artist="tsoi"></div>
+                        <div class="track-list">
+                            <div class="track-item" data-track="tsoi_group_of_blood.mp3" data-artist="Kino (Viktor Tsoi)" data-title="Группа крови">
+                                <span class="track-number">1</span>
+                                <span class="track-name">Группа крови (Group of Blood)</span>
+                                <span class="track-icon">▶</span>
+                            </div>
+                            <div class="track-item" data-track="tsoi_star_called_sun.mp3" data-artist="Kino (Viktor Tsoi)" data-title="Звезда по имени Солнце">
+                                <span class="track-number">2</span>
+                                <span class="track-name">Звезда по имени Солнце (Star Called Sun)</span>
+                                <span class="track-icon">▶</span>
+                            </div>
+                            <div class="track-item" data-track="tsoi_changes.mp3" data-artist="Kino (Viktor Tsoi)" data-title="Перемен">
+                                <span class="track-number">3</span>
+                                <span class="track-name">Перемен (Changes)</span>
+                                <span class="track-icon">▶</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="player-controls" id="playerControls">
+        <div class="player-info">
+            <strong id="currentArtist">Artist</strong> — <span id="currentTrack">Track</span>
+        </div>
+        <div class="player-controls-center">
+            <button class="play-pause-btn" id="playPauseBtn">⏸</button>
+        </div>
+        <div class="volume-control">
+            <span>🔊</span>
+            <input type="range" id="volumeSlider" min="0" max="100" value="70">
+        </div>
+    </div>
+
+    <div class="branding-footer">
+        🎵 7 Wonders · @eng_with_betty · <a href="https://t.me/eng_with_betty" target="_blank">Telegram</a>
+    </div>
+
+    <audio id="audioPlayer" preload="auto"></audio>
+
+    <script>
+        const audioPlayer = document.getElementById('audioPlayer');
+        const playerControls = document.getElementById('playerControls');
+        const currentArtist = document.getElementById('currentArtist');
+        const currentTrack = document.getElementById('currentTrack');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        
+        let currentVinyl = null;
+        let currentTrackElement = null;
+        let isPlaying = false;
+
+        volumeSlider.addEventListener('input', (e) => {
+            audioPlayer.volume = e.target.value / 100;
+        });
+
+        audioPlayer.volume = 0.7;
+
+        playPauseBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                audioPlayer.pause();
+                playPauseBtn.textContent = '▶';
+                if (currentVinyl) currentVinyl.classList.remove('playing');
+                isPlaying = false;
+            } else {
+                audioPlayer.play();
+                playPauseBtn.textContent = '⏸';
+                if (currentVinyl) currentVinyl.classList.add('playing');
+                isPlaying = true;
+            }
+        });
+
+        document.querySelectorAll('.track-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const trackFile = this.getAttribute('data-track');
+                const artist = this.getAttribute('data-artist');
+                const title = this.getAttribute('data-title');
+                const vinyl = this.closest('.vinyl-container').querySelector('.vinyl-record');
+
+                document.querySelectorAll('.track-item').forEach(t => t.classList.remove('active'));
+                
+                if (currentVinyl && currentVinyl !== vinyl) {
+                    currentVinyl.classList.remove('playing');
+                }
+
+                if (currentTrackElement === this && isPlaying) {
+                    audioPlayer.pause();
+                    this.classList.remove('active');
+                    vinyl.classList.remove('playing');
+                    playPauseBtn.textContent = '▶';
+                    isPlaying = false;
+                    return;
+                }
+
+                this.classList.add('active');
+                currentTrackElement = this;
+
+                playTrack(trackFile, artist, title, vinyl);
+            });
+        });
+
+        document.querySelectorAll('.vinyl-record').forEach(vinyl => {
+            vinyl.addEventListener('click', function() {
+                const firstTrack = this.closest('.vinyl-container').querySelector('.track-item');
+                if (firstTrack) firstTrack.click();
+            });
+        });
+
+        function playTrack(trackFile, artist, title, vinyl) {
+            const audioPath = `audio/${trackFile}`;
+            
+            audioPlayer.src = audioPath;
+            audioPlayer.play().then(() => {
+                playerControls.classList.add('active');
+                currentArtist.textContent = artist;
+                currentTrack.textContent = title;
+                vinyl.classList.add('playing');
+                currentVinyl = vinyl;
+                playPauseBtn.textContent = '⏸';
+                isPlaying = true;
+            }).catch(error => {
+                console.error('Error:', error);
+                const vinylContainer = vinyl.closest('.vinyl-container');
+                const existingError = vinylContainer.querySelector('.error-message');
+                if (existingError) existingError.remove();
+                
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'error-message';
+                errorDiv.textContent = '⚠ Трек не найден: ' + trackFile;
+                vinylContainer.appendChild(errorDiv);
+                setTimeout(() => errorDiv.remove(), 4000);
+            });
+        }
+
+        audioPlayer.addEventListener('ended', () => {
+            if (currentVinyl) currentVinyl.classList.remove('playing');
+            if (currentTrackElement) currentTrackElement.classList.remove('active');
+            playPauseBtn.textContent = '▶';
+            isPlaying = false;
+        });
+
+        audioPlayer.addEventListener('error', () => {
+            if (currentVinyl) currentVinyl.classList.remove('playing');
+            playPauseBtn.textContent = '▶';
+            isPlaying = false;
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space' && playerControls.classList.contains('active')) {
+                e.preventDefault();
+                playPauseBtn.click();
+            }
+        });
+    </script>
+
+</body>
+</html>
